@@ -17,23 +17,26 @@ contract SecretNote {
   enum State {Invalid, Created, Spent}
   mapping(bytes32 => State) public notes; // mapping of hash of the note to state
 
-  function createNote(ERC20 srcToken, uint srcAmount) public {
+  function createNote(ERC20 srcToken, uint srcQty) public {
     // Check that the token transferFrom has succeeded
     require(srcToken.transferFrom(msg.sender, address(this), srcQty));
 
     // swap srcToken tokens with dai
-    uint swappedAmount = kyberSwap(srcToken, srcAmount);
+    uint swappedAmount = kyberSwap(srcToken, srcQty);
 
     // create secret note @todo nonce
-    notes[sha256(msg.sender, swappedAmount)] = State.Created;
+    bytes32 noteHash = sha256(bytes32(msg.sender), bytes32(swappedAmount));
+    notes[noteHash] = State.Created;
+    emit NoteCreated(noteHash);
   }
+  event NoteCreated(bytes32 noteId);
 
   function kyberSwap(ERC20 srcToken, uint srcQty) internal returns(uint) {
     // Get the minimum conversion rate
     uint minConversionRate;
     (minConversionRate,) = kyberProxy.getExpectedRate(srcToken, DAI_TOKEN_ADDRESS, srcQty);
 
-    kyberNetworkProxy.trade(
+    kyberProxy.trade(
       srcToken,
       srcQty,
       DAI_TOKEN_ADDRESS, // dest,
