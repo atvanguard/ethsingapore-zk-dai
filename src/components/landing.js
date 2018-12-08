@@ -8,12 +8,13 @@ class Landing extends Component {
         metaMaskLoginError: false
     };
 
+
     login = async () => {
         const address = await web3.eth.getCoinbase();
         const netId = await web3.eth.net.getId();
         if (ethUtil.isValidAddress(address) && netId == 42) {
             this.setState({ metaMaskLoginError: false });
-            this.props.history.push('/swap');
+            this.props.history.push('/swapper');
         } else {
             this.setState({ metaMaskLoginError: true });
         }
@@ -31,7 +32,7 @@ class Landing extends Component {
                     <strong>Error: </strong>
                     Metamask (n/w: Kovan) is required to use ZEtH!
           <br /> Please sign into Metamask or switch the network to Kovan in
-                                                                                                                                                                                                                                                                              order to proceed.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            order to proceed.
         </div>
             );
         }
@@ -44,14 +45,16 @@ class Landing extends Component {
           </h1>
                 </Animation>
 
-                <Button
-                    size="lg"
-                    color="primary"
-                    style={{ marginTop: '30px' }}
-                    onClick={this.login}
-                >
-                    Login with MetaMask
-        </Button>
+                <Animation type="fadeIn">
+                    <Button
+                        size="lg"
+                        color="primary"
+                        style={{ marginTop: '30px' }}
+                        onClick={this.login}
+                    >
+                        Login with MetaMask
+                     </Button>
+                </Animation>
                 {metaMaskErrorAlert}
             </div>
         );
