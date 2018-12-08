@@ -1,0 +1,20 @@
+import "LIBSNARK/sha256packed"
+
+def main(field onh0, field onh1, private field ona, private field onb, private field onc, private field ond, field nn1h0, field nn1h1, private field nn1a, private field nn1b, private field nn1c, private field nn1d, field nn2h0, field nn2h1, private field nn2a, private field nn2b, private field nn2c, private field nn2d) -> (field):
+    // old note
+    h0, h1 = sha256packed(ona, onb, onc, ond)
+    h0 == onh0
+    h1 == onh1
+
+    // new note 1 that goes to pkreciever
+    h0, h1 = sha256packed(nn1a, nn1b, nn1c, nn1d)
+    h0 == nn1h0
+    h1 == nn1h1
+
+    // new note (left over change) that goes back to sender (pk)
+    h0, h1 = sha256packed(nn2a, nn2b, nn2c, nn2d)
+    h0 == nn2h0
+    h1 == nn2h1
+
+    ond == nn1d + nn2d // assuming ond, nn1d, nn2d is a 0 128 bit num
+    return 1
