@@ -1,18 +1,11 @@
-const fs = require('fs');
 const BN = require('bn.js');
 
-// const proofJson = JSON.parse(fs.readFileSync('./zksnark/proof.json', 'utf8'));
-//     const proof = proofJson.proof;
-//     const input = proofJson.input;
-//     console.log(input.toString())
-    let proofJson = fs.readFileSync('./zksnark/proof.json', 'utf8');
-    // console.log(proofJson)
-    var rx2 = /([0-9]+)[,]/gm
-    console.log(proofJson.match(rx2))
-    proofJson.match(rx2).forEach(p => {
-      proofJson = proofJson.replace(p, `"${p.slice(0, p.length-1)}",`)
-    })
-    proofJson = JSON.parse(proofJson);
-    console.log(proofJson)
-    // console.log(new BN(proofJson.input[0].toString()).toString())
-    // console.log(JSON.stringify(proofJson.input))
+async function encrypt(address, _amount) {
+  // 20 12
+  let amount = new BN(_amount, 16).toString(16, 24); // 12 bytes = 24 chars in hex
+  const payload = address + amount;
+  console.log(payload)
+  const encryptedNote = await web3.eth.accounts.encrypt('0x' + payload, 'vitalik')
+}
+
+encrypt('2B522cABE9950D1153c26C1b399B293CaA99FcF9', '5');

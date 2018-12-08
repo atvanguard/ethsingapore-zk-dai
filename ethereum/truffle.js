@@ -1,5 +1,5 @@
 var HDWalletProvider = require("truffle-hdwallet-provider");
-const MNEMONIC = 'vibrant round obscure celery gravity obey explain sauce coffee lecture glow dwarf';
+const MNEMONIC = 'gesture rather obey video awake genuine patient base soon parrot upset lounge';
 
 /*
  * NB: since truffle-hdwallet-provider 0.0.5 you must wrap HDWallet providers in a 
@@ -37,11 +37,14 @@ const MNEMONIC = 'vibrant round obscure celery gravity obey explain sauce coffee
 module.exports = {
   networks: {
     development: {
+      // provider: function () {
+      //   return new HDWalletProvider(MNEMONIC, "http://localhost:8545", 0, /* address_index */)
+      // },
       host: "127.0.0.1",
       port: 8545,
       network_id: "*" // Match any network id
     },
-    ropsten: {
+    kovan: {
       provider: function () {
         return new HDWalletProvider(MNEMONIC, "https://kovan.infura.io/v3/f2aa27e5bf2b4bf1b3b002e8687b61da")
       },
