@@ -1,19 +1,11 @@
 pragma solidity ^0.4.25;
 
-// import "./kyber/ERC20Interface.sol";
-// import "./kyber/KyberNetworkProxy.sol";
+import "./ERC20Interface.sol";
 import "./verifier.sol";
 
 contract SecretNote is Verifier {
 
-  // ERC20 internal DAI_TOKEN_ADDRESS = ERC20(0x00eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee);
-  // ERC20 DAI_TOKEN_ADDRESS;
-  // KyberNetworkProxy kyberProxy;
-
-  // constructor(address _kyberNetworkProxy, address daiTokenAddress) {
-  //   // DAI_TOKEN_ADDRESS = ERC20(daiTokenAddress);
-  //   // kyberProxy = KyberNetworkProxy(_kyberNetworkProxy);
-  // }
+  ERC20 internal DAI_TOKEN_ADDRESS = ERC20(0xad6d458402f60fd3bd25163575031acdce07538d);
 
   constructor() {}
 
@@ -64,6 +56,21 @@ contract SecretNote is Verifier {
     createNote(note, encryptedNote);
     emit debug(bytes32(msg.sender), bytes32(amount));
   }
+
+  function claimNote(uint amount) public {
+    bytes32 note = sha256(bytes32(msg.sender), bytes32(amount));
+    require(
+      notes[note] == State.Created,
+      'note doesnt exist'
+    );
+    notes[note] = State.Spent;
+    require(
+      DAI_TOKEN_ADDRESS.transferFrom(address(this), msg.sender, amount * (10 ** 18)),
+      'daiToken transfer failed'
+    );
+    emit Claim(address(this), msg.sender, amount);
+  }
+  event Claim(address from, address to, uint amount);
 
   function transferNote(
     uint[2] a,
