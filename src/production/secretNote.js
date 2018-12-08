@@ -58,7 +58,7 @@ export const getAllNotes = async () => {
   console.log('len', len)
   for(let i = 0; i < len; i++) {
     // const hash = await SecretNote.methods.allHashedNotes(i).call();
-    const hash = await SecretNote.methods.allNotes(i).call();
+    const hash = await SecretNote.methods.allHashedNotes(i).call();
     notes.push({hash})
   }
   console.log('allnotes', notes)
