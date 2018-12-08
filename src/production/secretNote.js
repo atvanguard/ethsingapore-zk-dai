@@ -44,7 +44,7 @@ export const getNotes = async () => {
       console.log('state', state)
       if (state == '1' || state == '2') {
         // needs to be displayed
-        notes.push({hash: noteHash, status: state == '1' ? 'Created' : 'Spent', amount: parseInt(dec.amount, 16)});
+        notes.push({hash: '0x' + noteHash, status: state == '1' ? 'Created' : 'Spent', amount: parseInt(dec.amount, 16)});
       }
     }
   }
