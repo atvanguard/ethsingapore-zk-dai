@@ -7,8 +7,7 @@ import 'mdbreact/dist/css/mdb.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Landing from './components/landing'
-import Swapper from './components/swapper'
-import ZeroCash from './components/zeroCash'
+import Home from './components/home'
 
 
 class App extends Component {
@@ -16,8 +15,9 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/swapper" component={Swapper} />
-          <Route path="/zeroCash" component={ZeroCash} />
+          <Route path="/home" component={Home} />
+          {/* <Route path="/swapper" component={Swapper} />
+          <Route path="/zeroCash" component={ZeroCash} /> */}
           <Route component={Landing} />
         </Switch>
       </BrowserRouter>
