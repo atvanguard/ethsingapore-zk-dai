@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import { MDBContainer } from 'mdbreact'
+import { MDBContainer, Animation } from 'mdbreact'
 
 class Swapper extends Component {
-    state = {
-
-    }
+    state = {}
 
     render() {
         return (
-            <MDBContainer className="text-center">
-                <h1>  HERE WE SWAP </h1>
-            </MDBContainer>
+            <Animation type="fadeIn">
+
+                <MDBContainer className="text-center">
+                    <h1>  HERE WE SWAP </h1>
+                </MDBContainer>
+            </Animation>
         );
     }
 }
