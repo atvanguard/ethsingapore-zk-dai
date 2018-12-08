@@ -21,6 +21,10 @@ contract SecretNote is Verifier {
   mapping(bytes32 => State) public notes; // mapping of hash of the note to state
   string[] public allNotes;
 
+  function getNotesLength() public view returns(uint) {
+    return allNotes.length;
+  }
+
   // function createNote(ERC20 srcToken, uint srcQty) public {
   //   // Check that the token transferFrom has succeeded
   //   require(srcToken.transferFrom(msg.sender, address(this), srcQty));
