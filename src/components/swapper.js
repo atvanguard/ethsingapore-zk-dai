@@ -5,11 +5,16 @@ class Swapper extends Component {
     state = {}
 
     render() {
+
+        const kyberWidget = (<a href='https://widget.kyber.network/v0.3/?type=pay&mode=popup&theme=light&receiveAddr=0x63B42a7662538A1dA732488c252433313396eade&receiveToken=ETH&callback=https%3A%2F%2F93cf11e2.ngrok.io%2Fcallback&paramForwarding=true&network=ropsten&enc=mynote'
+        class='kyber-widget-button' name='KyberWidget - Powered by KyberNetwork' title='Pay with tokens'
+        target='_blank'>Pay with tokens</a>);
+
         return (
             <Animation type="fadeIn">
 
                 <MDBContainer className="text-center">
-                    <h1>  HERE WE SWAP </h1>
+                    {kyberWidget}
                 </MDBContainer>
             </Animation>
         );
