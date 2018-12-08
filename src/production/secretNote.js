@@ -32,7 +32,6 @@ export const getNotes = async () => {
   const userAccount = accounts[0].slice(2);
 
   const len = await SecretNote.methods.getNotesLength().call();
-  console.log('len', len)
   for(let i = 0; i < len; i++) {
     const cipher = await SecretNote.methods.allNotes(i).call();
     console.log('cipher', cipher)
@@ -45,7 +44,7 @@ export const getNotes = async () => {
       console.log('state', state)
       if (state == '1' || state == '2') {
         // needs to be displayed
-        notes.push({hash: noteHash, status: state, amount: parseInt(dec.amount, 16)});
+        notes.push({hash: noteHash, status: state == '1' ? 'Created' : 'Spent', amount: parseInt(dec.amount, 16)});
       }
     }
   }
@@ -56,9 +55,11 @@ export const getNotes = async () => {
 export const getAllNotes = async () => {
   const notes = [];
   const len = await SecretNote.methods.getNotesLength().call();
+  console.log('len', len)
   for(let i = 0; i < len; i++) {
-    const cipher = await SecretNote.methods.allNotes(i).call();
-    notes.push({hash: cipher})
+    // const hash = await SecretNote.methods.allHashedNotes(i).call();
+    const hash = await SecretNote.methods.allNotes(i).call();
+    notes.push({hash})
   }
   console.log('allnotes', notes)
   return notes;
@@ -68,6 +69,7 @@ function getNoteHash(address, amount) {
   // pad address and amount to 32bytes
   let _address = new BN(address, 16).toString(16, 64);
   let _amount = new BN(amount, 16).toString(16, 64); // 32 bytes = 64 chars in hex
+  console.log(_address, _amount)
   const buf = Buffer.from(_address + _amount, 'hex');
   const digest = crypto.createHash('sha256').update(buf).digest('hex');
   console.log('digest', digest)
