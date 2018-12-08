@@ -3,12 +3,12 @@ const BN = require('bn.js')
 
 async function execute() {
   const accounts = await web3.eth.getAccounts();
-  console.log(accounts)
+  // console.log(accounts)
   const instance = await contractArtifact.deployed();
-  let enc = await encrypt(accounts[0].slice(2), '5')
+  let enc = await encrypt(accounts[0].slice(2), 'AF')
   console.log('enc', enc)
-  const tx = await instance.createNoteDummy('0x5', enc);
-  // console.dir(tx, {depth: null});
+  const tx = await instance.createNoteDummy('0xaf', enc);
+  console.dir(tx, {depth: null});
 }
 
 module.exports = async function(callback) {

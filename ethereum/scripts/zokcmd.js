@@ -58,10 +58,12 @@ function getSecretZokratesParams(concat) {
 }
 
 function getPublicZokratesParams(hexPayload) {
+  console.log('getPublicZokratesParams', hexPayload)
   const buf = Buffer.from(hexPayload, 'hex');
   const digest = crypto.createHash('sha256').update(buf).digest('hex');
   console.log('digest', digest, digest.length)
   // split into 128 bits each
+  console.log([digest.slice(0, 32), digest.slice(32)]);
   return [digest.slice(0, 32), digest.slice(32)]
   // const h0 = new BN(digest.slice(0, 32), 16).toString(10); // 128bit base10 number
   // const h1 = new BN(digest.slice(32), 16).toString(10);
@@ -93,9 +95,12 @@ function printZokratesCommand(params) {
 }
 
 function getTransferZkParams(from, fromAmount, to, toAmount) {
-  const params = getNoteParams(from, fromAmount).concat(getNoteParams(to, toAmount)).concat(getNoteParams(from, fromAmount - toAmount))
+  from = from.slice(2);
+  to = to.slice(2);
+  let change = parseInt(fromAmount, 16) - parseInt(toAmount, 16);
+  const params = getNoteParams(from, fromAmount).concat(getNoteParams(to, toAmount)).concat(getNoteParams(from, change))
   printZokratesCommand(params);
 }
 
-getTransferZkParams('F0188aa23d6D63091Dff507A1A242f99c521Efb5', '5', '0x606Fb9D12049DFb5527C2a4F82A766a78B19f124', '1');
+getTransferZkParams('0x2B522cABE9950D1153c26C1b399B293CaA99FcF9', 'af', '0x3644B986B3F5Ba3cb8D5627A22465942f8E06d09', 'a');
 // ./zokrates compute-witness -a 286550427305488977394924694994018785834 205474949803715015552170743613827585172 4028140194 81650876781348110012918890775141543861 0 5 42518252687123051326103574610632401199 175023873378575339825365605610328983248 35977673169 42918870878957257167236375246565667108 0 1 71326011196877878771923017956748168640 324785226026626794110398414083154131843 4028140194 81650876781348110012918890775141543861 0 4

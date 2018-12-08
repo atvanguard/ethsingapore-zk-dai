@@ -20,6 +20,7 @@ contract SecretNote is Verifier {
   enum State {Invalid, Created, Spent}
   mapping(bytes32 => State) public notes; // mapping of hash of the note to state
   string[] public allNotes;
+  bytes32[] public allHashedNotes;
 
   function getNotesLength() public view returns(uint) {
     return allNotes.length;
@@ -57,9 +58,11 @@ contract SecretNote is Verifier {
   //   return srcQty * minConversionRate;
   // }
 
+  event debug(bytes32 m, bytes32 m2);
   function createNoteDummy(uint amount, string encryptedNote) public {
     bytes32 note = sha256(bytes32(msg.sender), bytes32(amount));
     createNote(note, encryptedNote);
+    emit debug(bytes32(msg.sender), bytes32(amount));
   }
 
   function transferNote(
@@ -81,8 +84,13 @@ contract SecretNote is Verifier {
     );
 
     bytes32 spendingNote = calcNoteHash(input[0], input[1]);
-    require(notes[spendingNote] == State.Created);
+    // emit debug(spendingNote, bytes32(0));
+    require(
+      notes[spendingNote] == State.Created,
+      'spendingNote doesnt exist'
+    );
 
+    notes[spendingNote] = State.Spent;
     bytes32 newNote1 = calcNoteHash(input[2], input[3]);
     createNote(newNote1, encryptedNote1);
     bytes32 newNote2 = calcNoteHash(input[4], input[5]);
@@ -93,12 +101,15 @@ contract SecretNote is Verifier {
   function createNote(bytes32 note, string encryptedNote) internal {
     notes[note] = State.Created;
     allNotes.push(encryptedNote);
+    allHashedNotes.push(note);
     emit NoteCreated(note, allNotes.length - 1);
   }
 
-  function calcNoteHash(uint _a, uint _b) internal pure returns(bytes32 note) {
+  event d2(bytes16 a, bytes16 b);
+  function calcNoteHash(uint _a, uint _b) internal returns(bytes32 note) {
     bytes16 a = bytes16(_a);
     bytes16 b = bytes16(_b);
+    // emit d2(a, b);
     bytes memory _note = new bytes(32);
     
     for (uint i = 0; i < 16; i++) {
