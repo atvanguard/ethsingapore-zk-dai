@@ -33,13 +33,13 @@ class ZeroCash extends Component {
     render() {
         return (
             <div>
-                <h1 className="display-4 text-center mt-4 mb-5">Zero Cash</h1>
-                <h3 className="text-center text-muted">Cash Pool</h3>
-                <CashTable content={this.state.allNotes} />
-                <hr className="mt-5 mb-5"></hr>
+                <h1 className="display-4 text-center mt-4 mb-5">ZkDAI</h1>
                 <h3 className="text-center text-muted">Your Cash ({this.state.account})</h3>
                 {/* <OwnerCashTable content={userCash} /> */}
                 <OwnerCashTable content={this.state.notes} />
+                <h3 className="text-center text-muted">Cash Pool</h3>
+                <CashTable content={this.state.allNotes} />
+                <hr className="mt-5 mb-5"></hr>
             </div>
         );
     }

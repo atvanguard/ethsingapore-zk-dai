@@ -59,8 +59,8 @@ contract SecretNote is Verifier {
   // }
 
   event debug(bytes32 m, bytes32 m2);
-  function createNoteDummy(uint amount, string encryptedNote) public {
-    bytes32 note = sha256(bytes32(msg.sender), bytes32(amount));
+  function createNoteDummy(address owner, uint amount, string encryptedNote) public {
+    bytes32 note = sha256(bytes32(owner), bytes32(amount));
     createNote(note, encryptedNote);
     emit debug(bytes32(msg.sender), bytes32(amount));
   }

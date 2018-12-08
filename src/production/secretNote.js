@@ -3,10 +3,8 @@ import compiledSecretNote from './SecretNote.json';
 const BN = require('bn.js');
 const crypto = require('crypto');
 
-console.log('compiledSecretNote', compiledSecretNote, )
-const netId = Object.keys(compiledSecretNote.networks)[0];
-
-const contractAddress = compiledSecretNote.networks[netId].address;
+// const contractAddress = compiledSecretNote.networks[netId].address;
+const contractAddress = '0x1578d87c52be8bcddb6d8f8e9b3749e06ad814d0'
 console.log('contractAddress', contractAddress)
 
 const SecretNote =  new web3.eth.Contract(
@@ -57,8 +55,9 @@ export const getAllNotes = async () => {
   const len = await SecretNote.methods.getNotesLength().call();
   console.log('len', len)
   for(let i = 0; i < len; i++) {
-    // const hash = await SecretNote.methods.allHashedNotes(i).call();
-    const hash = await SecretNote.methods.allHashedNotes(i).call();
+    const hash = await SecretNote.methods.allNotes(i).call();
+    const hash2 = await SecretNote.methods.allHashedNotes(i).call();
+    console.log(hash2)
     notes.push({hash})
   }
   console.log('allnotes', notes)
