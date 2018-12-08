@@ -12,9 +12,9 @@ class Landing extends Component {
     login = async () => {
         const address = await web3.eth.getCoinbase();
         const netId = await web3.eth.net.getId();
-        if (ethUtil.isValidAddress(address) && netId == 42) {
+        if (ethUtil.isValidAddress(address) && netId == 3) {
             this.setState({ metaMaskLoginError: false });
-            this.props.history.push('/swapper');
+            this.props.history.push('/home');
         } else {
             this.setState({ metaMaskLoginError: true });
         }
@@ -30,9 +30,9 @@ class Landing extends Component {
                     role="alert"
                 >
                     <strong>Error: </strong>
-                    Metamask (n/w: Kovan) is required to use ZEtH!
-          <br /> Please sign into Metamask or switch the network to Kovan in
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            order to proceed.
+                    Metamask (n/w: Ropsten) is required to use ZEtH!
+          <br /> Please sign into Metamask or switch the network the network to Ropsten
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                order to proceed.
         </div>
             );
         }
@@ -41,7 +41,7 @@ class Landing extends Component {
             <div className="container-fluid text-center">
                 <Animation type="zoomIn">
                     <h1 className="display-1" style={{ marginTop: '220px' }}>
-                        ZEtH
+                        ZkDAI
           </h1>
                 </Animation>
 

@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { MDBContainer, MDBRow } from 'mdbreact'
 import CashTable from './stateless/cashTable'
 import OwnerCashTable from './stateless/ownerCashTable'
-import {getNotes, getCurrentAccount, getAllNotes} from '../production/secretNote'
+import { getNotes, getCurrentAccount, getAllNotes } from '../production/secretNote'
 
 class ZeroCash extends Component {
     state = {
@@ -12,20 +11,20 @@ class ZeroCash extends Component {
 
     getNotes = async () => {
         const notes = await getNotes();
-        this.setState({notes})
+        this.setState({ notes })
     }
 
     getAllNotes = async () => {
         const allNotes = await getAllNotes();
-        this.setState({allNotes})
+        this.setState({ allNotes })
     }
 
     getAccount = async () => {
         const account = await getCurrentAccount();
-        this.setState({account})
+        this.setState({ account })
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getNotes();
         this.getAccount();
         this.getAllNotes();
@@ -33,7 +32,7 @@ class ZeroCash extends Component {
 
     render() {
         return (
-            <MDBContainer>
+            <div>
                 <h1 className="display-4 text-center mt-4 mb-5">Zero Cash</h1>
                 <h3 className="text-center text-muted">Cash Pool</h3>
                 <CashTable content={this.state.allNotes} />
@@ -41,7 +40,7 @@ class ZeroCash extends Component {
                 <h3 className="text-center text-muted">Your Cash ({this.state.account})</h3>
                 {/* <OwnerCashTable content={userCash} /> */}
                 <OwnerCashTable content={this.state.notes} />
-            </MDBContainer >
+            </div>
         );
     }
 }
