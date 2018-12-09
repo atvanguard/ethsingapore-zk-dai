@@ -48,7 +48,8 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "signature": "0x1cdf1357"
   },
   {
     "constant": true,
@@ -67,7 +68,8 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "signature": "0x58a5d596"
   },
   {
     "constant": true,
@@ -86,7 +88,8 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "signature": "0x85de26b7"
   },
   {
     "constant": true,
@@ -105,13 +108,15 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "signature": "0xddabcf41"
   },
   {
     "inputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "constructor"
+    "type": "constructor",
+    "signature": "constructor"
   },
   {
     "anonymous": false,
@@ -128,16 +133,12 @@ const abi = [
       }
     ],
     "name": "debug",
-    "type": "event"
+    "type": "event",
+    "signature": "0x02451fae0adb7ceff4e670c0e623b1c9e0b2898e612e291ad76e596de0a2d053"
   },
   {
     "anonymous": false,
     "inputs": [
-      {
-        "indexed": false,
-        "name": "from",
-        "type": "address"
-      },
       {
         "indexed": false,
         "name": "to",
@@ -150,7 +151,8 @@ const abi = [
       }
     ],
     "name": "Claim",
-    "type": "event"
+    "type": "event",
+    "signature": "0x47cee97cb7acd717b3c0aa1435d004cd5b3c8c57d70dbceb4e4458bbd60e39d4"
   },
   {
     "anonymous": false,
@@ -167,7 +169,8 @@ const abi = [
       }
     ],
     "name": "NoteCreated",
-    "type": "event"
+    "type": "event",
+    "signature": "0xc904a92388c152c0c63dfe30e3e880273673ef7d33ea18195aecb5ba50f546fc"
   },
   {
     "anonymous": false,
@@ -184,7 +187,8 @@ const abi = [
       }
     ],
     "name": "d2",
-    "type": "event"
+    "type": "event",
+    "signature": "0xd278e8c3a630dc4a7eb08180a3880316949e0f4b449df0b97df01512353786ce"
   },
   {
     "anonymous": false,
@@ -196,7 +200,8 @@ const abi = [
       }
     ],
     "name": "Verified",
-    "type": "event"
+    "type": "event",
+    "signature": "0x3f3cfdb26fb5f9f1786ab4f1a1f9cd4c0b5e726cbdfc26e495261731aad44e39"
   },
   {
     "constant": true,
@@ -210,7 +215,8 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "signature": "0xeb3d72d1"
   },
   {
     "constant": false,
@@ -232,7 +238,8 @@ const abi = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "signature": "0xd9758ae0"
   },
   {
     "constant": false,
@@ -246,7 +253,8 @@ const abi = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "signature": "0xa4654ead"
   },
   {
     "constant": false,
@@ -300,7 +308,8 @@ const abi = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "signature": "0x573d7339"
   }
 ]
 
@@ -317,8 +326,7 @@ const _web3 = new Web3(new Web3.providers.WebsocketProvider('wss://ropsten.infur
 let daiContract = new _web3.eth.Contract([{"constant":true,"inputs":[],"name":"mintingFinished","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"mint","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_value","type":"uint256"}],"name":"burn","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_subtractedValue","type":"uint256"}],"name":"decreaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_value","type":"uint256"}],"name":"burnFrom","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"finishMinting","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_addedValue","type":"uint256"}],"name":"increaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[],"name":"MintFinished","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"burner","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Burn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"}],
 '0xaD6D458402F60fD3Bd25163575031ACDce07538D');
 
-const secretNoteAddress = '0x1913b321054a50de2c726b5860be84257c915b36'
-// const secretNoteAddress = '0xc7a5b080b59621281fa9bd9ea40fb6d8942a69d2'
+const secretNoteAddress = '0x9960818c27697f89b9639eb5ec6f8437172ef8af'
 
 let secretNoteContract = new web3.eth.Contract(abi, secretNoteAddress);
 // exports.module = {secretNoteAddress, abi};
@@ -333,6 +341,7 @@ const options = {
 
 async function execute() {
   return new Promise((resolve, reject) => {
+    let b = false;
     daiContract.events.Transfer(options,
       async (error, event) => {
         if (error) {
@@ -346,7 +355,10 @@ async function execute() {
           const tx = await web3.eth.getTransaction(event.transactionHash)
           const benefiaciary = tx.from.slice(2);
           const val = new BN(event.returnValues.value, 10).div(new BN('1000000000000000000')).toString('hex')
-          await createNote(benefiaciary, val);
+          if(!b) {
+            b = true;
+            await createNote(benefiaciary, val);
+          }
         } catch(e) {
           console.log(e)
         }

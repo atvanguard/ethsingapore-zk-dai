@@ -1,31 +1,32 @@
 import React, { Component } from 'react';
 import { Table, TableBody, TableHead } from 'mdbreact';
+import { claimDAI } from '../../production/secretNote';
 
-class OwnerCashTable extends Component {
+const OwnerCashTable  = (props) => {
 
-    state = { loading: false }
 
-    claim = async () => {
-        console.log('Claiming')
+    const claim = async (amount) => {
+        console.log('Claiming', amount)
+        claimDAI(parseInt(amount));
     }
 
-    getTableRows = () => {
-        const tableRows = this.props.content.map((data, index) => {
+    const getTableRows = () => {
+        const tableRows = props.content.map((data, index) => {
             let claimer;
             if (data.status == 'Created') {
                 claimer = <button
                     type="submit"
-                    className="btn btn-lg btn-primary mt-4 animated fadeIn"
-                    onClick={this.claim(data.amount)}
+                    className="btn btn-sm btn-primary mt-4 animated fadeIn"
+                    onClick={()=>{claim(data.amount)}}
                 >
-                    Claim >
+                    Claim
                     </button>
             } else {
                 claimer = <button
                     type="submit"
-                    className="btn btn-lg btn-primary mt-4 animated fadeIn" disabled
+                    className="btn btn-sm btn-blue-grey mt-4 animated fadeIn" disabled
                 >
-                    Claim >
+                    Claim
                     </button>
             }
             return (<tr key={index} className="animated fadeIn">
@@ -35,11 +36,10 @@ class OwnerCashTable extends Component {
                 <td>{data.amount}</td>
                 <td>{claimer}</td>
             </tr>);
-        })
+        });
+        return tableRows;
 
     }
-
-    render() {
         return (
             <Table hover>
                 <TableHead>
@@ -53,11 +53,11 @@ class OwnerCashTable extends Component {
                 </TableHead>
 
                 <TableBody>
-                    {this.getTableRows()}
+                    {getTableRows()}
                 </TableBody>
             </Table >
         );
-    }
+    
 }
 
 export default OwnerCashTable;

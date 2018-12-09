@@ -50,7 +50,8 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "signature": "0x1cdf1357"
   },
   {
     "constant": true,
@@ -69,7 +70,8 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "signature": "0x58a5d596"
   },
   {
     "constant": true,
@@ -88,7 +90,8 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "signature": "0x85de26b7"
   },
   {
     "constant": true,
@@ -107,13 +110,15 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "signature": "0xddabcf41"
   },
   {
     "inputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "constructor"
+    "type": "constructor",
+    "signature": "constructor"
   },
   {
     "anonymous": false,
@@ -130,7 +135,26 @@ const abi = [
       }
     ],
     "name": "debug",
-    "type": "event"
+    "type": "event",
+    "signature": "0x02451fae0adb7ceff4e670c0e623b1c9e0b2898e612e291ad76e596de0a2d053"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "Claim",
+    "type": "event",
+    "signature": "0x47cee97cb7acd717b3c0aa1435d004cd5b3c8c57d70dbceb4e4458bbd60e39d4"
   },
   {
     "anonymous": false,
@@ -147,7 +171,8 @@ const abi = [
       }
     ],
     "name": "NoteCreated",
-    "type": "event"
+    "type": "event",
+    "signature": "0xc904a92388c152c0c63dfe30e3e880273673ef7d33ea18195aecb5ba50f546fc"
   },
   {
     "anonymous": false,
@@ -164,7 +189,8 @@ const abi = [
       }
     ],
     "name": "d2",
-    "type": "event"
+    "type": "event",
+    "signature": "0xd278e8c3a630dc4a7eb08180a3880316949e0f4b449df0b97df01512353786ce"
   },
   {
     "anonymous": false,
@@ -176,7 +202,8 @@ const abi = [
       }
     ],
     "name": "Verified",
-    "type": "event"
+    "type": "event",
+    "signature": "0x3f3cfdb26fb5f9f1786ab4f1a1f9cd4c0b5e726cbdfc26e495261731aad44e39"
   },
   {
     "constant": true,
@@ -190,7 +217,8 @@ const abi = [
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "signature": "0xeb3d72d1"
   },
   {
     "constant": false,
@@ -212,7 +240,23 @@ const abi = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "signature": "0xd9758ae0"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "claimNote",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xa4654ead"
   },
   {
     "constant": false,
@@ -266,11 +310,12 @@ const abi = [
     "outputs": [],
     "payable": false,
     "stateMutability": "nonpayable",
-    "type": "function"
+    "type": "function",
+    "signature": "0x573d7339"
   }
 ]
 
-const secretNoteAddress = '0x1578d87c52be8bcddb6d8f8e9b3749e06ad814d0'
+const secretNoteAddress = '0x9960818c27697f89b9639eb5ec6f8437172ef8af'
 
 const BN = require('bn.js')
 const fs = require('fs');

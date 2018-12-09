@@ -3,9 +3,8 @@ import compiledSecretNote from './SecretNote.json';
 const BN = require('bn.js');
 const crypto = require('crypto');
 
-// const contractAddress = compiledSecretNote.networks[netId].address;
-// const contractAddress = '0x1578d87c52be8bcddb6d8f8e9b3749e06ad814d0'
-const contractAddress = '0xb450e27085d81d270b8279fe8af3ebde583a44f3'
+// const contractAddress = compiledSecretNote.networks[5777].address;
+const contractAddress = '0x9960818c27697f89b9639eb5ec6f8437172ef8af'
 console.log('contractAddress', contractAddress)
 
 const SecretNote = new web3.eth.Contract(
@@ -67,8 +66,10 @@ export const getAllNotes = async () => {
 
 export const claimDAI = async (amount) => {
   const accounts = await getAccounts();
+  console.log('accounts', accounts, amount)
   await SecretNote.methods.claimNote(amount).send({
-    from: accounts[0]
+    from: accounts[0],
+    gasPrice: '0x' + parseInt('10000000000').toString(16)
   });
 }
 
@@ -94,6 +95,5 @@ async function decrypt(cipher, userAccount) {
   // payload = payload.slice(2)
   // const amount = payload.slice(40)
   // console.log(address, amount);
-
 }
 

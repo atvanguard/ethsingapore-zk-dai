@@ -7,7 +7,7 @@ async function execute() {
   const instance = await contractArtifact.deployed();
   let enc = await encrypt(accounts[0].slice(2), 'AF')
   console.log('enc', enc)
-  const tx = await instance.createNoteDummy('0xaf', enc);
+  const tx = await instance.createNoteDummy(accounts[0], '0xaf', enc);
   console.dir(tx, {depth: null});
 }
 

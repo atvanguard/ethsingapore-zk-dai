@@ -65,12 +65,12 @@ contract SecretNote is Verifier {
     );
     notes[note] = State.Spent;
     require(
-      DAI_TOKEN_ADDRESS.transferFrom(address(this), msg.sender, amount * (10 ** 18)),
+      DAI_TOKEN_ADDRESS.transfer(msg.sender, amount * (10 ** 18)),
       'daiToken transfer failed'
     );
-    emit Claim(address(this), msg.sender, amount);
+    emit Claim(msg.sender, amount * (10 ** 18));
   }
-  event Claim(address from, address to, uint amount);
+  event Claim(address to, uint amount);
 
   function transferNote(
     uint[2] a,
