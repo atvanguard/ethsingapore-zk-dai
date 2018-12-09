@@ -8,7 +8,7 @@ const crypto = require('crypto');
 const contractAddress = '0xb450e27085d81d270b8279fe8af3ebde583a44f3'
 console.log('contractAddress', contractAddress)
 
-const SecretNote =  new web3.eth.Contract(
+const SecretNote = new web3.eth.Contract(
   compiledSecretNote.abi,
   contractAddress
 )
@@ -31,7 +31,7 @@ export const getNotes = async () => {
   const userAccount = accounts[0].slice(2);
 
   const len = await SecretNote.methods.getNotesLength().call();
-  for(let i = 0; i < len; i++) {
+  for (let i = 0; i < len; i++) {
     const cipher = await SecretNote.methods.allNotes(i).call();
     console.log('cipher', cipher)
     const dec = await decrypt(cipher, userAccount);
@@ -43,7 +43,7 @@ export const getNotes = async () => {
       console.log('state', state)
       if (state == '1' || state == '2') {
         // needs to be displayed
-        notes.push({hash: '0x' + noteHash, status: state == '1' ? 'Created' : 'Spent', amount: parseInt(dec.amount, 16)});
+        notes.push({ hash: '0x' + noteHash, status: state == '1' ? 'Created' : 'Spent', amount: parseInt(dec.amount, 16) });
       }
     }
   }
@@ -55,14 +55,21 @@ export const getAllNotes = async () => {
   const notes = [];
   const len = await SecretNote.methods.getNotesLength().call();
   console.log('len', len)
-  for(let i = 0; i < len; i++) {
+  for (let i = 0; i < len; i++) {
     const hash = await SecretNote.methods.allNotes(i).call();
     const hash2 = await SecretNote.methods.allHashedNotes(i).call();
     console.log(hash2)
-    notes.push({hash})
+    notes.push({ hash })
   }
   console.log('allnotes', notes)
   return notes;
+}
+
+export const claimDAI = async (amount) => {
+  const accounts = await getAccounts();
+  await SecretNote.methods.claimNote(amount).send({
+    from: accounts[0]
+  });
 }
 
 function getNoteHash(address, amount) {
@@ -81,13 +88,12 @@ async function decrypt(cipher, userAccount) {
   const address = cipher.slice(0, 40).toLowerCase();
   const amount = cipher.slice(40);
   console.log(address, amount)
-  return {isMine: address === userAccount.toLowerCase(), amount}
+  return { isMine: address === userAccount.toLowerCase(), amount }
   // console.log('decrypt', address, userAccount)
   // return true;
   // payload = payload.slice(2)
   // const amount = payload.slice(40)
   // console.log(address, amount);
 
-  
 }
 

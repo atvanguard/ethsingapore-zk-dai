@@ -37,9 +37,9 @@ class ZeroCash extends Component {
                 <h3 className="text-center text-muted">Your Cash ({this.state.account})</h3>
                 {/* <OwnerCashTable content={userCash} /> */}
                 <OwnerCashTable content={this.state.notes} />
+                <hr className="mt-5 mb-5"></hr>
                 <h3 className="text-center text-muted">Cash Pool</h3>
                 <CashTable content={this.state.allNotes} />
-                <hr className="mt-5 mb-5"></hr>
             </div>
         );
     }
