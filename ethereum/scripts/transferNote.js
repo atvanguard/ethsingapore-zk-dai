@@ -315,7 +315,7 @@ const abi = [
   }
 ]
 
-const secretNoteAddress = '0x9960818c27697f89b9639eb5ec6f8437172ef8af'
+const secretNoteAddress = '0x187dc8FF9092471A71e344C18F52Cad17e43d719'
 
 const BN = require('bn.js')
 const fs = require('fs');

@@ -1,8 +1,0 @@
-import "LIBSNARK/sha256packed"
-
-def main(field onh0, field onh1, field ona, field onb, field onc, field ond) -> (field):
-    // old note
-    h0, h1 = sha256packed(ona, onb, onc, ond)
-    h0 == onh0
-    h1 == onh1
-    return 1
