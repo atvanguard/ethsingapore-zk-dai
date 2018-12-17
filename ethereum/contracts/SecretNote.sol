@@ -14,47 +14,9 @@ contract SecretNote is Verifier {
   string[] public allNotes;
   bytes32[] public allHashedNotes;
 
-  function getNotesLength() public view returns(uint) {
-    return allNotes.length;
-  }
-
-  // function createNote(ERC20 srcToken, uint srcQty) public {
-  //   // Check that the token transferFrom has succeeded
-  //   require(srcToken.transferFrom(msg.sender, address(this), srcQty));
-
-  //   // swap srcToken tokens with dai
-  //   uint swappedAmount = kyberSwap(srcToken, srcQty);
-
-  //   // create secret note @todo nonce
-  //   bytes32 noteHash = sha256(bytes32(msg.sender), bytes32(swappedAmount));
-  //   notes[noteHash] = State.Created;
-  //   allNotes.push(noteHash);
-  //   emit NoteCreated(noteHash);
-  // }
-
-  // function kyberSwap(ERC20 srcToken, uint srcQty) internal returns(uint) {
-  //   // Get the minimum conversion rate
-  //   uint minConversionRate;
-  //   (minConversionRate,) = kyberProxy.getExpectedRate(srcToken, DAI_TOKEN_ADDRESS, srcQty);
-
-  //   kyberProxy.trade(
-  //     srcToken,
-  //     srcQty,
-  //     DAI_TOKEN_ADDRESS, // dest,
-  //     address(this), // destAddress address to send tokens to
-  //     1000000000, // maxDestAmount??
-  //     minConversionRate, // check
-  //     0
-  //   );
-
-  //   return srcQty * minConversionRate;
-  // }
-
-  event debug(bytes32 m, bytes32 m2);
-  function createNoteDummy(address owner, uint amount, string encryptedNote) public {
+  function createNote(address owner, uint amount, string encryptedNote) public {
     bytes32 note = sha256(bytes32(owner), bytes32(amount));
     createNote(note, encryptedNote);
-    emit debug(bytes32(msg.sender), bytes32(amount));
   }
 
   function claimNote(uint amount) public {
@@ -91,7 +53,6 @@ contract SecretNote is Verifier {
     );
 
     bytes32 spendingNote = calcNoteHash(input[0], input[1]);
-    // emit debug(spendingNote, bytes32(0));
     require(
       notes[spendingNote] == State.Created,
       'spendingNote doesnt exist'
@@ -104,6 +65,10 @@ contract SecretNote is Verifier {
     createNote(newNote2, encryptedNote2);
   }
 
+  function getNotesLength() public view returns(uint) {
+    return allNotes.length;
+  }
+
   event NoteCreated(bytes32 noteId, uint index);
   function createNote(bytes32 note, string encryptedNote) internal {
     notes[note] = State.Created;
@@ -112,11 +77,9 @@ contract SecretNote is Verifier {
     emit NoteCreated(note, allNotes.length - 1);
   }
 
-  event d2(bytes16 a, bytes16 b);
   function calcNoteHash(uint _a, uint _b) internal returns(bytes32 note) {
     bytes16 a = bytes16(_a);
     bytes16 b = bytes16(_b);
-    // emit d2(a, b);
     bytes memory _note = new bytes(32);
     
     for (uint i = 0; i < 16; i++) {

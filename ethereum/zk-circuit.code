@@ -1,9 +1,33 @@
 import "LIBSNARK/sha256packed"
 
-def main(field onh0, field onh1, private field ona, private field onb, private field onc, private field ond, field nn1h0, field nn1h1, private field nn1a, private field nn1b, private field nn1c, private field nn1d, field nn2h0, field nn2h1, private field nn2a, private field nn2b, private field nn2c, private field nn2d) -> (field):
+// https://zokrates.github.io/sha256example.html#computing-a-hash-using-zokrates
+// A field value can only hold 254 bits due to the size of the underlying prime field used by zokrates. Therefore, 256 bit values need to be passed as 2 params of 128 bit values.
+
+// https://zokrates.github.io/concepts/stdlib.html?highlight=sha256#sha256packed
+// At the time of writing sha256packed takes 4 field elements as inputs, unpacks each of them to 128 bits (big endian), concatenates them and applies sha256. It then returns two field elements, each representing 128 bits of the result.
+
+// Public inputs
+// onh0 + onh1: Hash of the note (secret note)
+// nn1h0 + nn1h1: Hash of the new note 1
+// nn2h0 + nn1h1: Hash of the new note 2
+
+// Private inputs
+// ona + onb: secret key of the sender
+// onc + ond: (256 bits) representing the value of the note to be spent
+
+// nn1a + nn1b: public key of the receiver
+// nn1c + nn1d: the value of the note to be sent
+
+// nn2c + nn2d: leftover change
+def main(field onh0, field onh1, private field ona, private field onb, private field onc, private field ond, field nn1h0, field nn1h1, private field nn1a, private field nn1b, private field nn1c, private field nn1d, field nn2h0, field nn2h1, private field nn2c, private field nn2d) -> (field):
+    // get public key corresponding to private key
+    // too complex to implement for the hackathon :p - so sending in the public key instead
+    field pka = ona
+    field pkb = onb
+
     // old note
-    h0, h1 = sha256packed(ona, onb, onc, ond)
-    h0 == onh0
+    h0, h1 = sha256packed(pka, pkb, onc, ond)
+    h0 == onh0 // verify with public input (hash of the note)
     h1 == onh1
 
     // new note 1 that goes to pkreciever
@@ -12,9 +36,9 @@ def main(field onh0, field onh1, private field ona, private field onb, private f
     h1 == nn1h1
 
     // new note (left over change) that goes back to sender (pk)
-    h0, h1 = sha256packed(nn2a, nn2b, nn2c, nn2d)
+    h0, h1 = sha256packed(pka, pkb, nn2c, nn2d)
     h0 == nn2h0
     h1 == nn2h1
 
-    ond == nn1d + nn2d // assuming ond, nn1d, nn2d is a 0 128 bit num
+    ond == nn1d + nn2d // assuming the values fit in 128 bit nums - hence onc, nn1c, nn2c are 0
     return 1
